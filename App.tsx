@@ -1,10 +1,22 @@
-import {SafeAreaView} from 'react-native';
-import CustomersList from './src/screens/CustomersList.tsx';
+import Home from './src/screens/Home.tsx';
+import {createStackNavigator} from '@react-navigation/stack';
+import Edit from './src/screens/Edit.tsx';
+import Create from './src/screens/Create.tsx';
+
+export type Params = {
+  Home: undefined;
+  Crear: {id: number};
+  Actualizar: undefined;
+};
+
+const Stack = createStackNavigator<Params>();
 
 export const App = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <CustomersList name="Miguel" />
-    </SafeAreaView>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Crear" component={Create} />
+      <Stack.Screen name="Actualizar" component={Edit} />
+    </Stack.Navigator>
   );
 };

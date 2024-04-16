@@ -1,7 +1,7 @@
 import {View} from 'react-native';
 
-const CustomerEdit = () => {
+const Edit = () => {
   return <View></View>;
 };
 
-export default CustomerEdit;
+export default Edit;

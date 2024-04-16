@@ -6,4 +6,4 @@ export interface CustomerRelation {
   city: City;
 }
 
-export type CustomerRelations = CustomerRelation;
+export type CustomerRelations = CustomerRelation[];
