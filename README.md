@@ -21,7 +21,9 @@ Se uso atomic design para la estructura de los componentes y principios SOLID pa
 - react-hook-form -> se usa para el manejo de los formularios
 
 
-**Imagenes de la app**
+### Imagenes de la app
+
+
 ![Creacion de un cliente](/assets/screen-home.png)
 ![Creacion de un cliente](/assets/screen-create.png)
 ![Creacion de un cliente](/assets/screen-update.png)
