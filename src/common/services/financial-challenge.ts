@@ -53,7 +53,7 @@ class FinancialChallenge extends HttpRequest {
 
       return new Response(response.data.data);
     } catch (error) {
-      return new Response([], error as AxiosError);
+      return new Response({}, error as AxiosError);
     }
   }
 
@@ -62,9 +62,6 @@ class FinancialChallenge extends HttpRequest {
       this.configRequest({endpoint: 'compartamos/customers'});
 
       const response = await this.get<GenericResponse<CustomerRelations>>();
-
-      console.log('response.ajsxbvsauj');
-      console.log(response.data);
 
       return new Response(response.data.data);
     } catch (error) {

@@ -2,8 +2,6 @@ import {Payload} from '../interfaces/payload.ts';
 import {UseFormWatch} from 'react-hook-form';
 
 export const validate = (name: string, watch: UseFormWatch<Payload>) => {
-  console.log('name', watch('first_name'));
-
   const errors: Record<string, {field: string; message: string}> = {
     first_name: {
       field: 'first_name',

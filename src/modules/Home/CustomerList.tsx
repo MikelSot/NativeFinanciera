@@ -14,10 +14,6 @@ const CustomerList = () => {
     queryFn: getAllCustomers,
   });
 
-  console.log(customerRelations);
-  console.log(isLoading);
-  console.log(isError, 'is e');
-
   if (isLoading) {
     return (
       <View>
@@ -26,7 +22,7 @@ const CustomerList = () => {
     );
   }
 
-  if (!customerRelations) {
+  if (!customerRelations || isError) {
     return (
       <View>
         <Text>No hay clientes</Text>

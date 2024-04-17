@@ -4,8 +4,6 @@ import {Payload, PayloadRelation} from '../interfaces/payload.ts';
 const service = new FinancialChallenge();
 
 export const createCustomer = async (payload: Payload) => {
-  console.log('payload', payload);
-
   const data: PayloadRelation = {
     customer: payload,
     city: {
@@ -45,9 +43,6 @@ export const getCustomerById = async (id: number) => {
 
 export const getAllCustomers = async () => {
   const response = await service.getAllCustomers();
-
-  console.log('response.data');
-  console.log(response.data);
 
   return response.data;
 };
