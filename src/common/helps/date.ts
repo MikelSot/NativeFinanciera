@@ -7,5 +7,7 @@ export const formatDateToBack = (date: string): string => {
 export const formatDateToFront = (date: string): string => {
   const items = date.split('T');
 
-  return items[0];
+  const dateItems = items[0].split('-');
+
+  return `${dateItems[2]}/${dateItems[1]}/${dateItems[0]}`;
 };

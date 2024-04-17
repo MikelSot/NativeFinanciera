@@ -30,6 +30,9 @@ export const updatedCustomer = async (id: number, payload: Payload) => {
 };
 
 export const deleteCustomer = async (customerId: number, cityId: number) => {
+  console.log('customerId, cityId');
+  console.log(customerId, cityId)
+
   const response = await service.deleteCustomer(customerId, cityId);
 
   return response.data;

@@ -62,22 +62,20 @@ const EditCustomer = () => {
   const {mutate: mutateDelete} = useMutation({
     mutationFn: () => deleteCustomer(params.id, customerRelation?.city?.id),
     onSuccess: async () => {
+      navigation.navigate('Home');
+
       await queryClient.refetchQueries({queryKey: ['customers']});
 
-      navigation.navigate('Home');
+      console.log('Eliminado correctamente');
     },
-    onError: () => {
-      setMessage('Upps ocuurio un erro inesperado');
+    onError: err => {
+      const errors = err as unknown as ErrorResponse;
+      setMessage(
+        errors?.response?.data?.errors[0]?.message ||
+          'Upps ocuurio un erro inesperado',
+      );
     },
   });
-
-  const onSubmit = (data: Payload) => {
-    mutate({...data, birth_date: formatDateToBack(data.birth_date)});
-  };
-
-  const onDelete = () => {
-    mutateDelete();
-  };
 
   if (isLoading) {
     return (
@@ -94,6 +92,14 @@ const EditCustomer = () => {
       </View>
     );
   }
+
+  const onSubmit = (data: Payload) => {
+    mutate({...data, birth_date: formatDateToBack(data.birth_date)});
+  };
+
+  const onDelete = () => {
+    mutateDelete();
+  };
 
   const {customer, city} = customerRelation as CustomerRelation;
 
@@ -148,14 +154,17 @@ const EditCustomer = () => {
           defaultValue={city.id.toString()}
         />
 
-        <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+        <Button title="Submit" onPress={() => handleSubmit(onSubmit)} />
         {message && message !== '' && (
           <Text style={{color: 'red', textAlign: 'center', fontWeight: 'bold'}}>
             {message}
           </Text>
         )}
       </View>
-      <ButtonPressable mode="contained" onPress={onDelete}>
+      <ButtonPressable
+        style={{marginTop: 15}}
+        mode="contained"
+        onPress={onDelete}>
         Eliminar
       </ButtonPressable>
     </View>

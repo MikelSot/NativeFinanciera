@@ -32,15 +32,11 @@ class FinancialChallenge extends HttpRequest {
   }
 
   async deleteCustomer(customerId: number, cityId: number) {
-    try {
-      this.configRequest({
-        endpoint: `compartamos/customers/${customerId}/cities/${cityId}`,
-      });
+    this.configRequest({
+      endpoint: `compartamos/customers/${customerId}/cities/${cityId}`,
+    });
 
-      return await this.delete();
-    } catch (error) {
-      return new Response({}, error as AxiosError);
-    }
+    return await this.delete();
   }
 
   async getCustomerById(id: number) {
