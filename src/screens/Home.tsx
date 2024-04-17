@@ -1,7 +1,8 @@
-import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import CustomerList from '../modules/Home/CustomerList.tsx';
+import {FAB} from 'react-native-paper';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Params} from '../../App.tsx';
-import CustomerList from '../modules/Home/CustomerList.tsx';
 
 const Home = () => {
   const navigation = useNavigation<NavigationProp<Params>>();
@@ -10,10 +11,13 @@ const Home = () => {
     <View style={styles.container}>
       <SafeAreaView>
         <CustomerList />
-        <Pressable onPress={() => navigation.navigate('Crear', {id: 1})}>
-          <Text>Ir a editar</Text>
-        </Pressable>
       </SafeAreaView>
+      <FAB
+        icon=""
+        label="+"
+        style={styles.fab}
+        onPress={() => navigation.navigate('Crear')}
+      />
     </View>
   );
 };
@@ -22,6 +26,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E9E9Ef',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 });
 

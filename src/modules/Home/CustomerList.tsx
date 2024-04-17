@@ -2,35 +2,54 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {getAllCustomers} from '../../common/api/financial-chanllenge.ts';
 import CustomerItem from './CustomerItem.tsx';
+import {ActivityIndicator, MD2Colors} from 'react-native-paper';
 
 const CustomerList = () => {
-  const {data: customerRelations = []} = useQuery({
-    queryKey: ['todos'],
+  const {
+    data: customerRelations = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['customers'],
     queryFn: getAllCustomers,
   });
 
-  if (!customerRelations) return null;
+  console.log(customerRelations);
+  console.log(isLoading);
+  console.log(isError, 'is e');
+
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator animating={true} color={MD2Colors.red800} />
+      </View>
+    );
+  }
+
+  if (!customerRelations) {
+    return (
+      <View>
+        <Text>No hay clientes</Text>
+      </View>
+    );
+  }
 
   return (
-    <FlatList
-      data={customerRelations}
-      keyExtractor={item => item.customer.dni}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      renderItem={({item}) => <CustomerItem {...item} />}
-      ListHeaderComponent={() => (
-        <Text style={styles.title}>Lista de clientes</Text>
-      )}
-      contentContainerStyle={styles.contentContainerStyle}
-    />
+    <View>
+      <FlatList
+        data={customerRelations}
+        keyExtractor={item => item.customer.dni}
+        renderItem={({item}) => <CustomerItem {...item} />}
+        ListHeaderComponent={() => (
+          <Text style={styles.title}>Lista de clientes</Text>
+        )}
+        contentContainerStyle={styles.contentContainerStyle}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#E9E9Ef',
-  },
   contentContainerStyle: {
     padding: 15,
   },

@@ -5,8 +5,8 @@ import Create from './src/screens/Create.tsx';
 
 export type Params = {
   Home: undefined;
-  Crear: {id: number};
-  Actualizar: undefined;
+  Crear: undefined;
+  Actualizar: {id: number};
 };
 
 const Stack = createStackNavigator<Params>();

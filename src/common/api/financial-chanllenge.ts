@@ -1,16 +1,32 @@
 import FinancialChallenge from '../services/financial-challenge.ts';
-import {Customer} from '../interfaces/customer.ts';
+import {Payload, PayloadRelation} from '../interfaces/payload.ts';
 
 const service = new FinancialChallenge();
 
-export const createCustomer = async (payload: Customer) => {
-  const response = await service.createCustomer(payload);
+export const createCustomer = async (payload: Payload) => {
+  console.log('payload', payload);
+
+  const data: PayloadRelation = {
+    customer: payload,
+    city: {
+      id: parseInt(payload.city),
+    },
+  };
+
+  const response = await service.createCustomer(data);
 
   return response.data;
 };
 
-export const updatedCustomer = async (payload: Customer) => {
-  const response = await service.updatedCustomer(payload);
+export const updatedCustomer = async (id: number, payload: Payload) => {
+  const data: PayloadRelation = {
+    customer: payload,
+    city: {
+      id: parseInt(payload.city),
+    },
+  };
+
+  const response = await service.updatedCustomer(id, data);
 
   return response.data;
 };
@@ -29,6 +45,9 @@ export const getCustomerById = async (id: number) => {
 
 export const getAllCustomers = async () => {
   const response = await service.getAllCustomers();
+
+  console.log('response.data');
+  console.log(response.data);
 
   return response.data;
 };
